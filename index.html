@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,35 +18,54 @@
   --muted:#b5cdbd;
   --border:#28533b;
 }
-* {box-sizing:border-box}
-html {scroll-behavior:smooth}
+
+* {
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
 body {
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
   background:var(--bg);
   color:var(--text);
 }
-a {color:inherit;text-decoration:none}
 
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+/* TEXT-ONLY HEADER - NO PICTURE BANNER */
 header {
   text-align:center;
   padding:30px 16px;
-  background:linear-gradient(140deg,#10452e,#07150f);
+  background:#10452e;
 }
+
 .logo {
   font-size:30px;
   font-weight:900;
   color:var(--light);
   letter-spacing:1px;
 }
+
 .tagline {
   font-size:21px;
   font-weight:900;
   margin:17px 0 10px;
   color:white;
 }
-header p {color:#d2e9da;line-height:1.6}
 
+header p {
+  color:#d2e9da;
+  line-height:1.6;
+}
+
+/* NAVIGATION */
 nav {
   position:sticky;
   top:0;
@@ -58,18 +78,25 @@ nav {
   background:#0c2117;
   border-bottom:1px solid var(--border);
 }
+
 nav a {
   color:var(--light);
   font-weight:bold;
   font-size:14px;
 }
 
+/* WELCOME SECTION */
 .hero {
   text-align:center;
   padding:45px 18px;
-  background:radial-gradient(ellipse at top,#174d32,#07150f 75%);
+  background:#0b2116;
 }
-.hero h1 {font-size:30px;margin:0 0 14px}
+
+.hero h1 {
+  font-size:30px;
+  margin:0 0 14px;
+}
+
 .hero p {
   max-width:650px;
   margin:0 auto 22px;
@@ -77,6 +104,7 @@ nav a {
   color:var(--muted);
 }
 
+/* BUTTONS */
 .btn {
   display:inline-block;
   padding:13px 19px;
@@ -88,23 +116,30 @@ nav a {
   cursor:pointer;
   margin:4px;
 }
-.btn:hover {filter:brightness(1.1)}
+
+.btn:hover {
+  filter:brightness(1.1);
+}
+
 .btn-outline {
   background:transparent;
   border:1px solid var(--light);
   color:var(--light);
 }
 
+/* SECTIONS */
 section {
   max-width:1100px;
   margin:auto;
   padding:34px 16px;
 }
+
 h2 {
   text-align:center;
   color:var(--light);
   margin:0 0 12px;
 }
+
 .intro {
   text-align:center;
   color:var(--muted);
@@ -113,11 +148,13 @@ h2 {
   margin:0 auto 24px;
 }
 
+/* CYBER SERVICES */
 .services {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
   gap:13px;
 }
+
 .service {
   background:var(--panel);
   border:1px solid var(--border);
@@ -125,26 +162,37 @@ h2 {
   text-align:center;
   padding:20px 10px;
 }
+
 .service span {
   display:block;
   font-size:29px;
   margin-bottom:10px;
 }
-.service strong {font-size:14px}
 
+.service strong {
+  font-size:14px;
+}
+
+/* WIFI PACKAGES */
 .package-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(225px,1fr));
   gap:15px;
   margin-top:25px;
 }
+
 .package {
   background:var(--panel);
   border:1px solid var(--border);
   border-radius:14px;
   padding:19px;
 }
-.package h3 {margin:0 0 13px;color:white}
+
+.package h3 {
+  margin:0 0 13px;
+  color:white;
+}
+
 .price-row {
   display:flex;
   justify-content:space-between;
@@ -153,8 +201,15 @@ h2 {
   border-bottom:1px solid #294737;
   color:var(--muted);
 }
-.price-row b {color:var(--light)}
-.package .btn {width:100%;margin-top:15px}
+
+.price-row b {
+  color:var(--light);
+}
+
+.package .btn {
+  width:100%;
+  margin-top:15px;
+}
 
 .status {
   color:var(--muted);
@@ -162,6 +217,8 @@ h2 {
   font-size:13px;
   margin-top:15px;
 }
+
+/* PAYMENT NOTICE */
 .notice {
   background:#382c12;
   border:1px solid #80652b;
@@ -173,6 +230,7 @@ h2 {
   margin-top:20px;
 }
 
+/* CONTACT */
 .contact-box {
   background:var(--panel);
   border:1px solid var(--border);
@@ -180,12 +238,14 @@ h2 {
   text-align:center;
   padding:25px 15px;
 }
+
 .phone {
   font-size:27px;
   font-weight:bold;
   color:var(--light);
   margin:15px 0;
 }
+
 .contact-buttons {
   display:flex;
   flex-wrap:wrap;
@@ -194,6 +254,7 @@ h2 {
   margin-top:20px;
 }
 
+/* FOOTER */
 footer {
   text-align:center;
   background:#050e09;
@@ -203,6 +264,7 @@ footer {
   line-height:1.8;
 }
 
+/* PACKAGE MODAL */
 .modal {
   display:none;
   position:fixed;
@@ -213,6 +275,7 @@ footer {
   align-items:center;
   justify-content:center;
 }
+
 .modal-box {
   background:#10271c;
   border:1px solid var(--green);
@@ -221,12 +284,18 @@ footer {
   max-width:390px;
   padding:22px;
 }
-.modal-box h3 {color:var(--light);margin-top:0}
+
+.modal-box h3 {
+  color:var(--light);
+  margin-top:0;
+}
+
 .modal-box label {
   display:block;
   margin:15px 0 7px;
   color:var(--muted);
 }
+
 .modal-box select {
   width:100%;
   padding:12px;
@@ -235,31 +304,53 @@ footer {
   color:white;
   border:1px solid var(--border);
 }
-.modal-box button {width:100%;margin-top:12px}
+
+.modal-box button {
+  width:100%;
+  margin-top:12px;
+}
+
 .message {
   color:#ffe5a1;
   font-size:13px;
   line-height:1.6;
   margin-top:14px;
 }
-.close-btn {background:#30483a;color:white}
 
-@media(max-width:450px) {
-  .logo {font-size:25px}
-  .tagline {font-size:18px}
-  .hero h1 {font-size:25px}
-  nav {gap:13px}
-  /* Remove unwanted cyber picture banners */
+.close-btn {
+  background:#30483a;
+  color:white;
+}
+
+/* REMOVE IMAGE BANNERS AND GALLERIES */
 img,
 picture,
+video,
 .image-banner,
 .image-slider,
 .image-gallery,
 .carousel,
-.gallery {
-  display: none !important;
+.gallery,
+.banner {
+  display:none !important;
 }
-  
+
+@media(max-width:450px) {
+  .logo {
+    font-size:25px;
+  }
+
+  .tagline {
+    font-size:18px;
+  }
+
+  .hero h1 {
+    font-size:25px;
+  }
+
+  nav {
+    gap:13px;
+  }
 }
 </style>
 </head>
@@ -349,6 +440,7 @@ picture,
   <div class="contact-box">
     <div>Call / SMS / WhatsApp</div>
     <div class="phone">0728847578</div>
+
     <div class="contact-buttons">
       <a class="btn" href="tel:0728847578">📞 Call</a>
       <a class="btn" href="sms:0728847578">✉️ SMS</a>
@@ -399,7 +491,11 @@ document.getElementById("year").textContent =
   new Date().getFullYear();
 
 function choosePackage(name,one,two) {
-  selected = {name,oneDevice:one,twoDevices:two};
+  selected = {
+    name,
+    oneDevice:one,
+    twoDevices:two
+  };
 
   document.getElementById("selectedName").textContent =
     "Selected: " + name;
@@ -539,5 +635,4 @@ loadPackages();
 </script>
 
 </body>
-  </html>
-  
+</html>
