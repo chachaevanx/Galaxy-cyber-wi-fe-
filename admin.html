@@ -11,15 +11,119 @@
 <section class="panel"><h3>Package price schedule</h3><div id="prices"></div><p class="muted">Two-device price = single-device price × 1.65, rounded to nearest shilling.</p></section></div>
 <section class="panel" style="margin-top:14px"><h3>Recent payments</h3><div class="tablewrap"><table><thead><tr><th>Date</th><th>Phone</th><th>Package</th><th>Devices</th><th>Amount</th><th>Status</th></tr></thead><tbody id="recent"><tr><td colspan="6">Loading…</td></tr></tbody></table></div></section>
 </div></div>
+
 <script>
-let adminToken=sessionStorage.getItem('galexAdminToken')||'';
-const plans=[['1 Hour',10,17],['3 Hours',15,25],['6 Hours',25,41],['24 Hours',40,66],['1 Week',200,330],['1 Month',850,1403]];
-function headers(){return {'Authorization':'Bearer '+adminToken}}
-async function signin(){adminToken=document.getElementById('token').value.trim();tryconst r=await fetch('https://galex-cyber-wifi-api.chachaevanx.workers.dev/api/admin/summary',{headers:headers()});;if(!r.ok)throw Error('Token rejected or server unavailable');sessionStorage.setItem('galexAdminToken',adminToken);openDash()}catch(e){document.getElementById('loginMsg').textContent=e.message}}
-function logout(){sessionStorage.removeItem('galexAdminToken');adminToken='';document.getElementById('dash').classList.add('hidden');document.getElementById('login').classList.remove('hidden')}
-async function openDash(){document.getElementById('login').classList.add('hidden');document.getElementById('dash').classList.remove('hidden');document.getElementById('prices').innerHTML=plans.map(p=>`<div class="row"><span>${p[0]}</span><b>KSh ${p[1]} / ${p[2]}</b></div>`).join('');await refresh()}
-async function refresh(){const r=await fetch('/api/admin/summary',{headers:headers()});if(!r.ok){logout();return}const d=await r.json();document.getElementById('payments').textContent=d.totalPayments;document.getElementById('revenue').textContent='KSh '+Number(d.revenue).toLocaleString('en-KE');document.getElementById('active').textContent=d.activeSubscriptions;document.getElementById('pending').textContent=d.pendingPayments;document.getElementById('recent').innerHTML=d.recent.map(p=>`<tr><td>${new Date(p.created_at).toLocaleString()}</td><td>${p.phone}</td><td>${p.plan_name}</td><td>${p.devices}</td><td>KSh ${p.amount}</td><td>${p.status}</td></tr>`).join('')||'<tr><td colspan="6">No payments yet.</td></tr>'}
-async function getScript(){const r=await fetch('/api/admin/mikrotik-script',{headers:headers()});const d=await r.json();document.getElementById('script').textContent=d.script||d.error}
-function copyScript(){navigator.clipboard.writeText(document.getElementById('script').textContent)}
-if(adminToken)openDash();
-</script></body></html>
+let adminToken = sessionStorage.getItem('galexAdminToken') || '';
+
+const API = 'https://galex-cyber-wifi-api.chachaevanx.workers.dev';
+
+const plans = [
+  ['1 Hour',10,17],
+  ['3 Hours',15,25],
+  ['6 Hours',25,41],
+  ['24 Hours',40,66],
+  ['1 Week',200,330],
+  ['1 Month',850,1403]
+];
+
+function headers() {
+  return {'Authorization':'Bearer ' + adminToken};
+}
+
+async function signin() {
+  adminToken = document.getElementById('token').value.trim();
+
+  if (!adminToken) {
+    document.getElementById('loginMsg').textContent = 'Enter your admin token.';
+    return;
+  }
+
+  const msg = document.getElementById('loginMsg');
+  msg.textContent = 'Checking login...';
+
+  try {
+    const r = await fetch(API + '/api/admin/summary', {
+      headers: headers()
+    });
+
+    if (!r.ok) throw new Error('Token rejected or server unavailable');
+
+    sessionStorage.setItem('galexAdminToken', adminToken);
+    await openDash();
+
+  } catch (e) {
+    msg.textContent = e.message;
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('galexAdminToken');
+  adminToken = '';
+  document.getElementById('dash').classList.add('hidden');
+  document.getElementById('login').classList.remove('hidden');
+}
+
+async function openDash() {
+  document.getElementById('login').classList.add('hidden');
+  document.getElementById('dash').classList.remove('hidden');
+
+  document.getElementById('prices').innerHTML =
+    plans.map(p =>
+      `<div class="row"><span>${p[0]}</span><b>KSh ${p[1]} / ${p[2]}</b></div>`
+    ).join('');
+
+  await refresh();
+}
+
+async function refresh() {
+  try {
+    const r = await fetch(API + '/api/admin/summary', {
+      headers: headers()
+    });
+
+    if (!r.ok) throw new Error('Could not load dashboard data');
+
+    const d = await r.json();
+
+    document.getElementById('payments').textContent = d.totalPayments;
+    document.getElementById('revenue').textContent =
+      'KSh ' + Number(d.revenue).toLocaleString('en-KE');
+    document.getElementById('active').textContent = d.activeSubscriptions;
+    document.getElementById('pending').textContent = d.pendingPayments;
+
+    document.getElementById('recent').innerHTML =
+      (d.recent || []).map(p =>
+        `<tr>
+          <td>${new Date(p.created_at).toLocaleString()}</td>
+          <td>${p.phone || ''}</td>
+          <td>${p.plan_name || ''}</td>
+          <td>${p.devices || ''}</td>
+          <td>KSh ${p.amount}</td>
+          <td>${p.status}</td>
+        </tr>`
+      ).join('') ||
+      '<tr><td colspan="6">No payments yet.</td></tr>';
+
+  } catch (e) {
+    document.getElementById('loginMsg').textContent = e.message;
+    logout();
+  }
+}
+
+async function getScript() {
+  const r = await fetch(API + '/api/admin/mikrotik-script', {
+    headers: headers()
+  });
+  const d = await r.json();
+  document.getElementById('script').textContent = d.script || d.error;
+}
+
+function copyScript() {
+  navigator.clipboard.writeText(
+    document.getElementById('script').textContent
+  );
+}
+
+if (adminToken) openDash();
+  </script>
+</body></html>
