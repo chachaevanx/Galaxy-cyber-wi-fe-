@@ -1,129 +1,360 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071a13"><title>Galex WiFi Admin</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071a13">
+<title>Galex Cyber WiFi - Admin</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#07150f;color:#f2fff6;font:14px system-ui,Arial}.wrap{max-width:1100px;margin:auto;padding:25px 18px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid #ffffff1a;padding-bottom:18px}.brand{font-size:20px;font-weight:900}.brand span{color:#29dc82}.muted{color:#a8c1b1;font-size:12px}.panel,.stat{background:linear-gradient(145deg,#11291e,#0b1e15);border:1px solid #ffffff18;border-radius:15px;padding:18px}.login{max-width:430px;margin:70px auto}.field{margin:12px 0}.field label{display:block;margin-bottom:6px;color:#cde5d5;font-size:12px}.field input{width:100%;padding:12px;border-radius:9px;border:1px solid #315a42;background:#06160f;color:white}.btn{background:#29dc82;color:#062013;border:0;border-radius:9px;padding:11px 15px;font-weight:900;cursor:pointer}.btn.secondary{background:#17442c;color:#e6fff0;border:1px solid #2b7148}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}.stat strong{display:block;font-size:25px;margin-top:8px;color:#b5ff79}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #ffffff15}.code{white-space:pre-wrap;word-break:break-word;background:#04100b;padding:13px;border-radius:9px;color:#b8ffd2;font:12px ui-monospace,monospace;max-height:260px;overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px}td,th{text-align:left;padding:10px;border-bottom:1px solid #ffffff18}th{color:#b5ff79}.hidden{display:none!important}.notice{padding:11px;background:#3b301a55;border:1px solid #8e753c66;border-radius:9px;color:#f2dfa8;font-size:12px;margin:12px 0}
-@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}table{min-width:560px}.tablewrap{overflow:auto}}
-</style></head><body><div class="wrap">
-<div class="top"><div><div class="brand">GALEX <span>CYBER</span> WiFi · Admin</div><div class="muted">Management dashboard</div></div><button class="btn secondary" onclick="logout()">Sign out</button></div>
-<div id="login" class="panel login"><h2>Administrator sign in</h2><p class="muted">Use the ADMIN_TOKEN configured on the server.</p><div class="field"><label>Admin token</label><input id="token" type="password" autocomplete="current-password" placeholder="Enter admin token"></div><button class="btn" onclick="signin()">Open dashboard</button><div id="loginMsg" class="muted" style="margin-top:10px"></div></div>
-<div id="dash" class="hidden"><div class="stats"><div class="stat"><div class="muted">Payments</div><strong id="payments">—</strong></div><div class="stat"><div class="muted">Confirmed revenue</div><strong id="revenue">—</strong></div><div class="stat"><div class="muted">Active subscriptions</div><strong id="active">—</strong></div><div class="stat"><div class="muted">Pending payments</div><strong id="pending">—</strong></div></div>
-<div class="grid"><section class="panel"><h3>Router setup generator</h3><p class="muted">Generate a starter RouterOS script for review. Confirm interface names, RouterOS version and existing configuration before applying it.</p><button class="btn" onclick="getScript()">Generate Winbox commands</button><pre id="script" class="code">Commands will appear here.</pre><button class="btn secondary" onclick="copyScript()">Copy commands</button><div class="notice">Do not paste unreviewed commands into a live router. This starter script does not configure your WAN, bridge, hotspot server, VPN or firewall.</div></section>
-<section class="panel"><h3>Package price schedule</h3><div id="prices"></div><p class="muted">Two-device price = single-device price × 1.65, rounded to nearest shilling.</p></section></div>
-<section class="panel" style="margin-top:14px"><h3>Recent payments</h3><div class="tablewrap"><table><thead><tr><th>Date</th><th>Phone</th><th>Package</th><th>Devices</th><th>Amount</th><th>Status</th></tr></thead><tbody id="recent"><tr><td colspan="6">Loading…</td></tr></tbody></table></div></section>
-</div></div>
+*{box-sizing:border-box}
+body{margin:0;background:#07150f;color:#f2fff6;font:14px system-ui,Arial}
+.wrap{max-width:1100px;margin:auto;padding:22px 16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid #ffffff20;padding-bottom:18px}
+.brand{font-size:21px;font-weight:900}
+.brand span{color:#29dc82}
+.muted{color:#a8c1b1;font-size:12px}
+.panel,.stat{background:linear-gradient(145deg,#11291e,#0b1e15);border:1px solid #ffffff20;border-radius:15px;padding:18px}
+.login{max-width:430px;margin:65px auto}
+.field{margin:14px 0}
+.field label{display:block;margin-bottom:7px;color:#cde5d5}
+.field input{width:100%;padding:13px;border-radius:9px;border:1px solid #315a42;background:#06160f;color:white;font-size:15px}
+.btn{background:#29dc82;color:#062013;border:0;border-radius:9px;padding:12px 16px;font-weight:900;cursor:pointer}
+.btn:disabled{opacity:.6}
+.secondary{background:#17442c;color:#e6fff0;border:1px solid #2b7148}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
+.stat strong{display:block;font-size:25px;margin-top:8px;color:#b5ff79}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #ffffff20}
+.code{white-space:pre-wrap;word-break:break-word;background:#04100b;padding:13px;border-radius:9px;color:#b8ffd2;font:12px monospace;max-height:260px;overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+td,th{text-align:left;padding:10px;border-bottom:1px solid #ffffff20}
+th{color:#b5ff79}
+.hidden{display:none!important}
+.notice{padding:11px;background:#3b301a55;border:1px solid #8e753c66;border-radius:9px;color:#f2dfa8;font-size:12px;margin:12px 0}
+.message{margin-top:12px;min-height:20px;color:#b5ff79;overflow-wrap:anywhere}
+.tablewrap{overflow-x:auto}
+@media(max-width:700px){
+.stats{grid-template-columns:repeat(2,1fr)}
+.grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<div class="top">
+ <div>
+  <div class="brand">GALEX <span>CYBER</span> WiFi · Admin</div>
+  <div class="muted">Management dashboard</div>
+ </div>
+ <button class="btn secondary" onclick="logout()">Sign out</button>
+</div>
+
+<!-- LOGIN -->
+<div id="login" class="panel login">
+ <h2>Administrator sign in</h2>
+ <p class="muted">Enter the admin token configured in Cloudflare.</p>
+
+ <div class="field">
+  <label for="token">Admin token</label>
+  <input id="token" type="password" autocomplete="current-password" placeholder="Enter admin token">
+ </div>
+
+ <button id="loginButton" class="btn" onclick="signin()">Open dashboard</button>
+ <div id="loginMsg" class="message"></div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dash" class="hidden">
+
+ <div class="stats">
+  <div class="stat">
+   <div class="muted">Payments</div>
+   <strong id="payments">—</strong>
+  </div>
+  <div class="stat">
+   <div class="muted">Confirmed revenue</div>
+   <strong id="revenue">—</strong>
+  </div>
+  <div class="stat">
+   <div class="muted">Active subscriptions</div>
+   <strong id="active">—</strong>
+  </div>
+  <div class="stat">
+   <div class="muted">Pending payments</div>
+   <strong id="pending">—</strong>
+  </div>
+ </div>
+
+ <div class="grid">
+
+  <section class="panel">
+   <h3>Router setup generator</h3>
+   <p class="muted">Request a starter RouterOS script from the server.</p>
+   <button class="btn" onclick="getScript()">Generate Winbox commands</button>
+   <pre id="script" class="code">Commands will appear here.</pre>
+   <button class="btn secondary" onclick="copyScript()">Copy commands</button>
+   <div class="notice">
+    Review all commands before applying them to a live router.
+    This generator does not configure every router requirement.
+   </div>
+   <div id="scriptMsg" class="message"></div>
+  </section>
+
+  <section class="panel">
+   <h3>Package price schedule</h3>
+   <div id="prices"></div>
+   <p class="muted">Two-device price is 1.65 times the single-device price.</p>
+  </section>
+
+ </div>
+
+ <section class="panel" style="margin-top:14px">
+  <h3>Recent payments</h3>
+  <div class="tablewrap">
+   <table>
+    <thead>
+     <tr>
+      <th>Date</th>
+      <th>Phone</th>
+      <th>Package</th>
+      <th>Devices</th>
+      <th>Amount</th>
+      <th>Status</th>
+     </tr>
+    </thead>
+    <tbody id="recent">
+     <tr><td colspan="6">Loading...</td></tr>
+    </tbody>
+   </table>
+  </div>
+  <button class="btn secondary" onclick="refresh()">Refresh data</button>
+ </section>
+
+</div>
+</div>
 
 <script>
-let adminToken = sessionStorage.getItem('galexAdminToken') || '';
+"use strict";
 
-const API = 'https://galex-cyber-wifi-api.chachaevanx.workers.dev';
+const API = "https://galex-cyber-wifi-api.chachaevanx.workers.dev";
+
+let adminToken = "";
 
 const plans = [
-  ['1 Hour',10,17],
-  ['3 Hours',15,25],
-  ['6 Hours',25,41],
-  ['24 Hours',40,66],
-  ['1 Week',200,330],
-  ['1 Month',850,1403]
+ ["1 Hour",10,17],
+ ["3 Hours",15,25],
+ ["6 Hours",25,41],
+ ["24 Hours",40,66],
+ ["1 Week",200,330],
+ ["1 Month",850,1403]
 ];
 
-function headers() {
-  return {'Authorization':'Bearer ' + adminToken};
+function headers(){
+ return {
+  "Authorization":"Bearer " + adminToken,
+  "Accept":"application/json"
+ };
 }
 
-async function signin() {
-  adminToken = document.getElementById('token').value.trim();
+function showMessage(id,message){
+ document.getElementById(id).textContent = message;
+}
 
-  if (!adminToken) {
-    document.getElementById('loginMsg').textContent = 'Enter your admin token.';
-    return;
+async function apiRequest(path){
+ const response = await fetch(API + path,{
+  method:"GET",
+  headers:headers()
+ });
+
+ const text = await response.text();
+
+ let data;
+ try{
+  data = JSON.parse(text);
+ }catch(e){
+  throw new Error("Server returned an invalid response.");
+ }
+
+ if(!response.ok){
+  throw new Error(data.error || "Server error: " + response.status);
+ }
+
+ return data;
+}
+
+async function signin(){
+
+ const input = document.getElementById("token");
+ const button = document.getElementById("loginButton");
+
+ adminToken = input.value.trim();
+
+ if(!adminToken){
+  showMessage("loginMsg","Please enter your admin token.");
+  return;
+ }
+
+ button.disabled = true;
+ button.textContent = "Checking...";
+ showMessage("loginMsg","Connecting to Galex server...");
+
+ try{
+
+  const data = await apiRequest("/api/admin/summary");
+
+  if(data.success === false){
+   throw new Error(data.error || "Login failed.");
   }
 
-  const msg = document.getElementById('loginMsg');
-  msg.textContent = 'Checking login...';
+  sessionStorage.setItem("galexAdminToken",adminToken);
 
-  try {
-    const r = await fetch(API + '/api/admin/summary', {
-      headers: headers()
-    });
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("dash").classList.remove("hidden");
 
-    if (!r.ok) throw new Error('Token rejected or server unavailable');
+  renderPrices();
+  await loadDashboard(data);
 
-    sessionStorage.setItem('galexAdminToken', adminToken);
-    await openDash();
+ }catch(error){
 
-  } catch (e) {
-    msg.textContent = e.message;
+  adminToken = "";
+  sessionStorage.removeItem("galexAdminToken");
+
+  showMessage("loginMsg","Login error: " + error.message);
+
+ }finally{
+
+  button.disabled = false;
+  button.textContent = "Open dashboard";
+
+ }
+}
+
+function logout(){
+
+ adminToken = "";
+ sessionStorage.removeItem("galexAdminToken");
+
+ document.getElementById("dash").classList.add("hidden");
+ document.getElementById("login").classList.remove("hidden");
+ document.getElementById("token").value = "";
+
+ showMessage("loginMsg","You have signed out.");
+
+}
+
+function renderPrices(){
+
+ document.getElementById("prices").innerHTML =
+ plans.map(p =>
+  `<div class="row">
+   <span>${p[0]}</span>
+   <b>KSh ${p[1]} / ${p[2]}</b>
+  </div>`
+ ).join("");
+
+}
+
+async function refresh(){
+
+ if(!adminToken){
+  showMessage("loginMsg","Please sign in again.");
+  logout();
+  return;
+ }
+
+ try{
+  const data = await apiRequest("/api/admin/summary");
+  await loadDashboard(data);
+ }catch(error){
+  showMessage("scriptMsg","Dashboard error: " + error.message);
+ }
+
+}
+
+async function loadDashboard(data){
+
+ document.getElementById("payments").textContent =
+  data.totalPayments ?? 0;
+
+ document.getElementById("revenue").textContent =
+  "KSh " + Number(data.revenue ?? 0).toLocaleString("en-KE");
+
+ document.getElementById("active").textContent =
+  data.activeSubscriptions ?? 0;
+
+ document.getElementById("pending").textContent =
+  data.pendingPayments ?? 0;
+
+ const recent = Array.isArray(data.recent) ? data.recent : [];
+
+ document.getElementById("recent").innerHTML =
+  recent.map(p => `
+   <tr>
+    <td>${escapeHTML(p.created_at || "")}</td>
+    <td>${escapeHTML(p.phone || "")}</td>
+    <td>${escapeHTML(p.plan_name || "")}</td>
+    <td>${escapeHTML(p.devices ?? "")}</td>
+    <td>KSh ${escapeHTML(p.amount ?? "")}</td>
+    <td>${escapeHTML(p.status || "")}</td>
+   </tr>
+  `).join("") ||
+  '<tr><td colspan="6">No payments yet.</td></tr>';
+
+}
+
+function escapeHTML(value){
+ return String(value).replace(/[&<>"']/g,function(c){
+  return {
+   "&":"&amp;",
+   "<":"&lt;",
+   ">":"&gt;",
+   '"':"&quot;",
+   "'":"&#39;"
+  }[c];
+ });
+}
+
+async function getScript(){
+
+ showMessage("scriptMsg","Requesting router commands...");
+
+ try{
+  const data = await apiRequest("/api/admin/mikrotik-script");
+
+  if(!data.script){
+   throw new Error(data.error || "Script endpoint is not available.");
   }
+
+  document.getElementById("script").textContent = data.script;
+  showMessage("scriptMsg","Commands received.");
+
+ }catch(error){
+
+  showMessage("scriptMsg","Error: " + error.message);
+
+ }
+
 }
 
-function logout() {
-  sessionStorage.removeItem('galexAdminToken');
-  adminToken = '';
-  document.getElementById('dash').classList.add('hidden');
-  document.getElementById('login').classList.remove('hidden');
+async function copyScript(){
+
+ const content = document.getElementById("script").textContent;
+
+ try{
+  await navigator.clipboard.writeText(content);
+  showMessage("scriptMsg","Commands copied.");
+ }catch(error){
+  showMessage("scriptMsg","Copy failed. Select and copy the commands manually.");
+ }
+
 }
 
-async function openDash() {
-  document.getElementById('login').classList.add('hidden');
-  document.getElementById('dash').classList.remove('hidden');
+// No automatic login during testing.
+// Always ask for the admin token.
+</script>
 
-  document.getElementById('prices').innerHTML =
-    plans.map(p =>
-      `<div class="row"><span>${p[0]}</span><b>KSh ${p[1]} / ${p[2]}</b></div>`
-    ).join('');
-
-  await refresh();
-}
-
-async function refresh() {
-  try {
-    const r = await fetch(API + '/api/admin/summary', {
-      headers: headers()
-    });
-
-    if (!r.ok) throw new Error('Could not load dashboard data');
-
-    const d = await r.json();
-
-    document.getElementById('payments').textContent = d.totalPayments;
-    document.getElementById('revenue').textContent =
-      'KSh ' + Number(d.revenue).toLocaleString('en-KE');
-    document.getElementById('active').textContent = d.activeSubscriptions;
-    document.getElementById('pending').textContent = d.pendingPayments;
-
-    document.getElementById('recent').innerHTML =
-      (d.recent || []).map(p =>
-        `<tr>
-          <td>${new Date(p.created_at).toLocaleString()}</td>
-          <td>${p.phone || ''}</td>
-          <td>${p.plan_name || ''}</td>
-          <td>${p.devices || ''}</td>
-          <td>KSh ${p.amount}</td>
-          <td>${p.status}</td>
-        </tr>`
-      ).join('') ||
-      '<tr><td colspan="6">No payments yet.</td></tr>';
-
-  } catch (e) {
-    document.getElementById('loginMsg').textContent = e.message;
-    logout();
-  }
-}
-
-async function getScript() {
-  const r = await fetch(API + '/api/admin/mikrotik-script', {
-    headers: headers()
-  });
-  const d = await r.json();
-  document.getElementById('script').textContent = d.script || d.error;
-}
-
-function copyScript() {
-  navigator.clipboard.writeText(
-    document.getElementById('script').textContent
-  );
-}
-
-if (adminToken) openDash();
-  </script>
-</body></html>
+</body>
+</html>
