@@ -1,356 +1,237 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07150f">
-<meta name="description" content="Galex Cyber WiFi - affordable WiFi and professional cyber café services in Kenya.">
-<title>Galex Cyber WiFi | All Cyber Services</title>
+<meta name="theme-color" content="#071a13">
+<meta name="description" content="Galex Cyber WiFi - Affordable and reliable WiFi packages.">
+<title>Galex Cyber WiFi</title>
 
 <style>
-:root {
-  --bg:#07150f;
-  --panel:#10271c;
-  --green:#25bd70;
-  --light:#79e8a8;
-  --text:#f1fff5;
-  --muted:#b5cdbd;
-  --border:#28533b;
-}
-
 * {
-  box-sizing:border-box;
-}
-
-html {
-  scroll-behavior:smooth;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
+    font-family: Arial, sans-serif;
+    background: #071a13;
+    color: #f2fff6;
+    line-height: 1.6;
 }
 
-a {
-  color:inherit;
-  text-decoration:none;
-}
-
-/* TEXT-ONLY HEADER - NO PICTURE BANNER */
 header {
-  text-align:center;
-  padding:30px 16px;
-  background:#10452e;
+    background: linear-gradient(135deg, #063b25, #071a13);
+    padding: 25px 15px;
+    text-align: center;
+    border-bottom: 1px solid #1b7047;
 }
 
 .logo {
-  font-size:30px;
-  font-weight:900;
-  color:var(--light);
-  letter-spacing:1px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #42e68a;
 }
 
 .tagline {
-  font-size:21px;
-  font-weight:900;
-  margin:17px 0 10px;
-  color:white;
+    color: #ffffff;
+    font-size: 14px;
+    margin-top: 5px;
+    letter-spacing: 1px;
 }
 
-header p {
-  color:#d2e9da;
-  line-height:1.6;
-}
-
-/* NAVIGATION */
 nav {
-  position:sticky;
-  top:0;
-  z-index:5;
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:20px;
-  padding:14px 8px;
-  background:#0c2117;
-  border-bottom:1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 22px;
+    padding: 14px 10px;
+    background: #0b261a;
+    border-bottom: 1px solid #174a31;
 }
 
 nav a {
-  color:var(--light);
-  font-weight:bold;
-  font-size:14px;
+    color: #d9ffea;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
 }
 
-/* WELCOME SECTION */
+nav a:hover {
+    color: #42e68a;
+}
+
 .hero {
-  text-align:center;
-  padding:45px 18px;
-  background:#0b2116;
+    text-align: center;
+    padding: 55px 18px;
+    background: radial-gradient(circle, #124d30, #071a13 75%);
 }
 
 .hero h1 {
-  font-size:30px;
-  margin:0 0 14px;
+    color: #42e68a;
+    font-size: 32px;
+    margin-bottom: 12px;
 }
 
 .hero p {
-  max-width:650px;
-  margin:0 auto 22px;
-  line-height:1.7;
-  color:var(--muted);
+    max-width: 600px;
+    margin: auto;
+    color: #d5e9dc;
+    font-size: 16px;
 }
 
-/* BUTTONS */
-.btn {
-  display:inline-block;
-  padding:13px 19px;
-  border:0;
-  border-radius:9px;
-  background:var(--green);
-  color:#04170c;
-  font-weight:bold;
-  cursor:pointer;
-  margin:4px;
+.hero-button {
+    display: inline-block;
+    margin-top: 22px;
+    padding: 12px 25px;
+    border-radius: 30px;
+    background: #20c76a;
+    color: #042313;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.btn:hover {
-  filter:brightness(1.1);
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px 15px;
 }
 
-.btn-outline {
-  background:transparent;
-  border:1px solid var(--light);
-  color:var(--light);
+.section-title {
+    text-align: center;
+    color: #42e68a;
+    font-size: 25px;
+    margin-bottom: 10px;
 }
 
-/* SECTIONS */
-section {
-  max-width:1100px;
-  margin:auto;
-  padding:34px 16px;
+.section-description {
+    text-align: center;
+    color: #b9d8c5;
+    margin-bottom: 25px;
 }
 
-h2 {
-  text-align:center;
-  color:var(--light);
-  margin:0 0 12px;
-}
-
-.intro {
-  text-align:center;
-  color:var(--muted);
-  line-height:1.7;
-  max-width:750px;
-  margin:0 auto 24px;
-}
-
-/* CYBER SERVICES */
-.services {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
-  gap:13px;
-}
-
-.service {
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:12px;
-  text-align:center;
-  padding:20px 10px;
-}
-
-.service span {
-  display:block;
-  font-size:29px;
-  margin-bottom:10px;
-}
-
-.service strong {
-  font-size:14px;
-}
-
-/* WIFI PACKAGES */
-.package-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(225px,1fr));
-  gap:15px;
-  margin-top:25px;
+.packages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
 }
 
 .package {
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:19px;
+    background: #102b1e;
+    border: 1px solid #216442;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.package:hover {
+    transform: translateY(-4px);
+    border-color: #42e68a;
 }
 
 .package h3 {
-  margin:0 0 13px;
-  color:white;
+    color: #42e68a;
+    font-size: 20px;
+    margin-bottom: 12px;
 }
 
-.price-row {
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  padding:10px 0;
-  border-bottom:1px solid #294737;
-  color:var(--muted);
+.price {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    margin: 8px 0;
 }
 
-.price-row b {
-  color:var(--light);
+.device-option {
+    background: #193b29;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
 }
 
-.package .btn {
-  width:100%;
-  margin-top:15px;
+.device-option p {
+    color: #cde8d6;
+    font-size: 14px;
 }
 
-.status {
-  color:var(--muted);
-  text-align:center;
-  font-size:13px;
-  margin-top:15px;
+.buy-button {
+    display: inline-block;
+    width: 100%;
+    padding: 11px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 7px;
+    background: #20c76a;
+    color: #042313;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-/* PAYMENT NOTICE */
+.buy-button:hover {
+    background: #42e68a;
+}
+
 .notice {
-  background:#382c12;
-  border:1px solid #80652b;
-  border-radius:11px;
-  color:#ffe5a1;
-  padding:15px;
-  line-height:1.6;
-  text-align:center;
-  margin-top:20px;
+    background: #142e20;
+    border: 1px solid #39734d;
+    padding: 16px;
+    border-radius: 10px;
+    margin-top: 25px;
+    text-align: center;
+    color: #d5e9dc;
 }
 
-/* CONTACT */
-.contact-box {
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:15px;
-  text-align:center;
-  padding:25px 15px;
+.contact {
+    background: #0b261a;
+    text-align: center;
+    padding: 35px 15px;
+    margin-top: 20px;
 }
 
-.phone {
-  font-size:27px;
-  font-weight:bold;
-  color:var(--light);
-  margin:15px 0;
+.contact h2 {
+    color: #42e68a;
+    margin-bottom: 10px;
 }
 
-.contact-buttons {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:10px;
-  margin-top:20px;
+.contact p {
+    color: #d5e9dc;
 }
 
-/* FOOTER */
+.whatsapp {
+    display: inline-block;
+    background: #20c76a;
+    color: #042313;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 12px 25px;
+    border-radius: 30px;
+    margin-top: 15px;
+}
+
 footer {
-  text-align:center;
-  background:#050e09;
-  padding:25px 15px;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.8;
+    text-align: center;
+    background: #04130c;
+    color: #9bb9a6;
+    padding: 18px 10px;
+    font-size: 13px;
 }
 
-/* PACKAGE MODAL */
-.modal {
-  display:none;
-  position:fixed;
-  z-index:20;
-  inset:0;
-  padding:18px;
-  background:#000c;
-  align-items:center;
-  justify-content:center;
-}
+@media(max-width: 450px) {
+    .logo {
+        font-size: 25px;
+    }
 
-.modal-box {
-  background:#10271c;
-  border:1px solid var(--green);
-  border-radius:15px;
-  width:100%;
-  max-width:390px;
-  padding:22px;
-}
+    .hero h1 {
+        font-size: 26px;
+    }
 
-.modal-box h3 {
-  color:var(--light);
-  margin-top:0;
-}
-
-.modal-box label {
-  display:block;
-  margin:15px 0 7px;
-  color:var(--muted);
-}
-
-.modal-box select {
-  width:100%;
-  padding:12px;
-  border-radius:8px;
-  background:#07150f;
-  color:white;
-  border:1px solid var(--border);
-}
-
-.modal-box button {
-  width:100%;
-  margin-top:12px;
-}
-
-.message {
-  color:#ffe5a1;
-  font-size:13px;
-  line-height:1.6;
-  margin-top:14px;
-}
-
-.close-btn {
-  background:#30483a;
-  color:white;
-}
-
-/* REMOVE IMAGE BANNERS AND GALLERIES */
-img,
-picture,
-video,
-.image-banner,
-.image-slider,
-.image-gallery,
-.carousel,
-.gallery,
-.banner {
-  display:none !important;
-}
-
-@media(max-width:450px) {
-  .logo {
-    font-size:25px;
-  }
-
-  .tagline {
-    font-size:18px;
-  }
-
-  .hero h1 {
-    font-size:25px;
-  }
-
-  nav {
-    gap:13px;
-  }
+    nav {
+        gap: 14px;
+    }
 }
 </style>
 </head>
@@ -358,281 +239,172 @@ video,
 <body>
 
 <header>
-  <div class="logo">GALEX CYBER WiFi</div>
-  <div class="tagline">WE PROVIDE ALL CYBER SERVICES</div>
-  <p>Affordable internet, reliable connectivity and professional cyber café services.</p>
-  <a class="btn" href="#packages">Explore WiFi Packages</a>
+    <div class="logo">GALEX CYBER WiFi</div>
+    <div class="tagline">FAST • RELIABLE • AFFORDABLE INTERNET</div>
 </header>
 
 <nav>
-  <a href="#home">Home</a>
-  <a href="#services">Cyber Services</a>
-  <a href="#packages">WiFi Packages</a>
-  <a href="#contact">Contact Us</a>
+    <a href="#home">Home</a>
+    <a href="#packages">WiFi Packages</a>
+    <a href="#contact">Contact</a>
 </nav>
 
-<div class="hero" id="home">
-  <h1>Welcome to Galex Cyber WiFi</h1>
-  <p>
-    Stay connected with affordable WiFi packages.
-    Visit our cyber café for convenient computer,
-    internet and other professional cyber services.
-  </p>
-  <a class="btn" href="#packages">View Packages</a>
-  <a class="btn btn-outline" href="https://wa.me/254728847578">WhatsApp Us</a>
-</div>
-
-<section id="services">
-  <h2>WE PROVIDE ALL CYBER SERVICES</h2>
-  <p class="intro">
-    Galex Cyber WiFi is also a cyber café.
-    Contact us for assistance with your everyday digital needs.
-  </p>
-
-  <div class="services">
-    <div class="service"><span>🖨️</span><strong>Printing Services</strong></div>
-    <div class="service"><span>📄</span><strong>Photocopying</strong></div>
-    <div class="service"><span>📷</span><strong>Scanning</strong></div>
-    <div class="service"><span>⌨️</span><strong>Typing & Documents</strong></div>
-    <div class="service"><span>📚</span><strong>Online Applications</strong></div>
-    <div class="service"><span>📧</span><strong>Email Services</strong></div>
-    <div class="service"><span>🎨</span><strong>Graphic Design</strong></div>
-    <div class="service"><span>🌐</span><strong>Internet Access</strong></div>
-    <div class="service"><span>📑</span><strong>CV & Document Preparation</strong></div>
-    <div class="service"><span>💻</span><strong>Computer Services</strong></div>
-  </div>
-
-  <p class="intro" style="margin-top:20px">
-    For any other cyber service, call, SMS or WhatsApp us.
-  </p>
+<section class="hero" id="home">
+    <h1>Welcome to Galex Cyber WiFi</h1>
+    <p>
+        Enjoy affordable and reliable internet access.
+        Choose your preferred package and connect your device.
+    </p>
+    <a href="#packages" class="hero-button">View WiFi Packages</a>
 </section>
 
-<section id="packages">
-  <h2>Affordable WiFi Packages</h2>
-  <p class="intro">
-    Choose your preferred duration and number of devices.
-    Two-device packages allow a maximum of two devices.
-  </p>
+<main class="container" id="packages">
 
-  <div class="package-grid" id="packageGrid">
-    <p class="status">Loading WiFi packages...</p>
-  </div>
+    <h2 class="section-title">Our WiFi Packages</h2>
+    <p class="section-description">
+        Choose a package that suits your internet needs.
+    </p>
 
-  <div class="status" id="apiStatus" aria-live="polite">
-    Connecting to Galex server...
-  </div>
+    <div class="packages">
 
-  <div class="notice">
-    <strong>Testing mode</strong><br>
-    Online M-Pesa payments are not active.
-    No real money will be charged. Contact the cyber desk
-    to purchase WiFi access.
-  </div>
-</section>
+        <div class="package">
+            <h3>3 Hours</h3>
+            <div class="device-option">
+                <p>Single Device</p>
+                <div class="price">KSh 10</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%203%20hours%20single-device%20WiFi%20package">
+                    Select Package
+                </a>
+            </div>
+            <div class="device-option">
+                <p>Two Devices</p>
+                <div class="price">KSh 20</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%203%20hours%20two-device%20WiFi%20package">
+                    Select Package
+                </a>
+            </div>
+        </div>
 
-<section id="contact">
-  <h2>Contact Galex Cyber WiFi</h2>
-  <p class="intro">
-    Need WiFi assistance or any cyber café service?
-    Reach the owner through any of the options below.
-  </p>
+        <div class="package">
+            <h3>6 Hours</h3>
+            <div class="device-option">
+                <p>Single Device</p>
+                <div class="price">KSh 20</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%206%20hours%20single-device%20WiFi%20package">Select Package</a>
+            </div>
+            <div class="device-option">
+                <p>Two Devices</p>
+                <div class="price">KSh 30</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%206%20hours%20two-device%20WiFi%20package">Select Package</a>
+            </div>
+        </div>
 
-  <div class="contact-box">
-    <div>Call / SMS / WhatsApp</div>
-    <div class="phone">0728847578</div>
+        <div class="package">
+            <h3>24 Hours</h3>
+            <div class="device-option">
+                <p>Single Device</p>
+                <div class="price">KSh 30</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%2024%20hours%20single-device%20WiFi%20package">Select Package</a>
+            </div>
+            <div class="device-option">
+                <p>Two Devices</p>
+                <div class="price">KSh 40</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%2024%20hours%20two-device%20WiFi%20package">Select Package</a>
+            </div>
+        </div>
 
-    <div class="contact-buttons">
-      <a class="btn" href="tel:0728847578">📞 Call</a>
-      <a class="btn" href="sms:0728847578">✉️ SMS</a>
-      <a class="btn" href="https://wa.me/254728847578">💬 WhatsApp</a>
+        <div class="package">
+            <h3>48 Hours</h3>
+            <div class="device-option">
+                <p>Single Device</p>
+                <div class="price">KSh 50</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%2048%20hours%20single-device%20WiFi%20package">Select Package</a>
+            </div>
+            <div class="device-option">
+                <p>Two Devices</p>
+                <div class="price">KSh 80</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%2048%20hours%20two-device%20WiFi%20package">Select Package</a>
+            </div>
+        </div>
+
+        <div class="package">
+            <h3>72 Hours</h3>
+            <div class="device-option">
+                <p>Single Device</p>
+                <div class="price">KSh 80</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%2072%20hours%20single-device%20WiFi%20package">Select Package</a>
+            </div>
+            <div class="device-option">
+                <p>Two Devices</p>
+                <div class="price">KSh 100</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%2072%20hours%20two-device%20WiFi%20package">Select Package</a>
+            </div>
+        </div>
+
+        <div class="package">
+            <h3>96 Hours</h3>
+            <div class="device-option">
+                <p>Single Device</p>
+                <div class="price">KSh 100</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%2096%20hours%20single-device%20WiFi%20package">Select Package</a>
+            </div>
+            <div class="device-option">
+                <p>Two Devices</p>
+                <div class="price">KSh 150</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%2096%20hours%20two-device%20WiFi%20package">Select Package</a>
+            </div>
+        </div>
+
+        <div class="package">
+            <h3>7 Days</h3>
+            <div class="device-option">
+                <p>Single Device</p>
+                <div class="price">KSh 150</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%207%20days%20single-device%20WiFi%20package">Select Package</a>
+            </div>
+            <div class="device-option">
+                <p>Two Devices</p>
+                <div class="price">KSh 200</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%207%20days%20two-device%20WiFi%20package">Select Package</a>
+            </div>
+        </div>
+
+        <div class="package">
+            <h3>1 Month</h3>
+            <div class="device-option">
+                <p>Single Device</p>
+                <div class="price">KSh 400</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%201%20month%20single-device%20WiFi%20package">Select Package</a>
+            </div>
+            <div class="device-option">
+                <p>Two Devices</p>
+                <div class="price">KSh 600</div>
+                <a class="buy-button" href="https://wa.me/254728847578?text=I%20want%20the%201%20month%20two-device%20WiFi%20package">Select Package</a>
+            </div>
+        </div>
+
     </div>
-  </div>
+
+    <div class="notice">
+        <strong>Need assistance?</strong>
+        <p>Contact our team on WhatsApp to request a WiFi package.</p>
+    </div>
+
+</main>
+
+<section class="contact" id="contact">
+    <h2>Contact Galex Cyber WiFi</h2>
+    <p>For WiFi packages and assistance, contact us.</p>
+    <p>WhatsApp: 0728847578</p>
+    <a class="whatsapp" href="https://wa.me/254728847578">
+        Chat with Us on WhatsApp
+    </a>
 </section>
 
 <footer>
-  <strong>GALEX CYBER WiFi</strong><br>
-  WE PROVIDE ALL CYBER SERVICES<br>
-  Call / SMS / WhatsApp: 0728847578<br>
-  © <span id="year"></span> Galex Cyber WiFi. All rights reserved.
+    <p>© 2026 Galex Cyber WiFi. All Rights Reserved.</p>
 </footer>
 
-<div class="modal" id="packageModal">
-  <div class="modal-box">
-    <h3>Choose Your WiFi Package</h3>
-    <p id="selectedName"></p>
-
-    <label for="deviceChoice">Number of devices</label>
-    <select id="deviceChoice" onchange="updatePrice()">
-      <option value="1">One device</option>
-      <option value="2">Two devices</option>
-    </select>
-
-    <p id="selectedPrice" style="color:#79e8a8;font-weight:bold"></p>
-
-    <div class="message">
-      Online M-Pesa payment is not active yet.
-      Contact the cyber desk to purchase this package.
-    </div>
-
-    <a class="btn" id="purchaseWhatsApp" href="https://wa.me/254728847578">
-      Contact Cyber Desk on WhatsApp
-    </a>
-
-    <button class="btn close-btn" onclick="closeModal()">Close</button>
-  </div>
-</div>
-
-<script>
-const API = "https://galaxy-cyber-wi-fe.onrender.com";
-
-let selected = null;
-
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-function choosePackage(name,one,two) {
-  selected = {
-    name,
-    oneDevice:one,
-    twoDevices:two
-  };
-
-  document.getElementById("selectedName").textContent =
-    "Selected: " + name;
-
-  document.getElementById("deviceChoice").value = "1";
-
-  updatePrice();
-
-  document.getElementById("packageModal").style.display = "flex";
-}
-
-function updatePrice() {
-  if (!selected) return;
-
-  const devices = Number(
-    document.getElementById("deviceChoice").value
-  );
-
-  const price = devices === 1
-    ? selected.oneDevice
-    : selected.twoDevices;
-
-  document.getElementById("selectedPrice").textContent =
-    "Total: KSh " + price;
-
-  const message =
-    "Hello Galex Cyber WiFi. I would like to purchase the " +
-    selected.name + " package for " + devices +
-    (devices === 1 ? " device" : " devices") +
-    " at KSh " + price + ". Please assist me.";
-
-  document.getElementById("purchaseWhatsApp").href =
-    "https://wa.me/254728847578?text=" +
-    encodeURIComponent(message);
-}
-
-function closeModal() {
-  document.getElementById("packageModal").style.display = "none";
-}
-
-document.getElementById("packageModal").addEventListener(
-  "click",
-  function(event) {
-    if (event.target === this) closeModal();
-  }
-);
-
-async function loadPackages() {
-  const status = document.getElementById("apiStatus");
-  const grid = document.getElementById("packageGrid");
-
-  try {
-    const response = await fetch(API + "/api/packages");
-
-    if (!response.ok) {
-      throw new Error("Server response: " + response.status);
-    }
-
-    const data = await response.json();
-
-    if (!data.success ||
-        !Array.isArray(data.packages) ||
-        data.packages.length !== 8) {
-      throw new Error("Invalid package data");
-    }
-
-    const packages = data.packages.map(p => ({
-      name:p.name,
-      oneDevice:Number(p.single_price),
-      twoDevices:Number(p.two_device_price)
-    }));
-
-    if (packages.some(p =>
-      !p.name ||
-      !Number.isFinite(p.oneDevice) ||
-      !Number.isFinite(p.twoDevices)
-    )) {
-      throw new Error("Invalid prices");
-    }
-
-    grid.innerHTML = "";
-
-    packages.forEach(p => {
-      const card = document.createElement("div");
-      card.className = "package";
-
-      const heading = document.createElement("h3");
-      heading.textContent = p.name;
-
-      const one = document.createElement("div");
-      one.className = "price-row";
-
-      const oneLabel = document.createElement("span");
-      oneLabel.textContent = "1 Device";
-
-      const onePrice = document.createElement("b");
-      onePrice.textContent = "KSh " + p.oneDevice;
-
-      one.append(oneLabel,onePrice);
-
-      const two = document.createElement("div");
-      two.className = "price-row";
-
-      const twoLabel = document.createElement("span");
-      twoLabel.textContent = "2 Devices";
-
-      const twoPrice = document.createElement("b");
-      twoPrice.textContent = "KSh " + p.twoDevices;
-
-      two.append(twoLabel,twoPrice);
-
-      const button = document.createElement("button");
-      button.className = "btn";
-      button.textContent = "Select Package";
-
-      button.addEventListener("click", () =>
-        choosePackage(p.name,p.oneDevice,p.twoDevices)
-      );
-
-      card.append(heading,one,two,button);
-      grid.appendChild(card);
-    });
-
-    status.textContent =
-      "Successfully connected to Galex Render server. All 8 packages loaded.";
-
-  } catch(error) {
-    grid.innerHTML =
-      '<p class="status">Unable to load packages from the server. Please refresh the page or contact the cyber desk.</p>';
-
-    status.textContent =
-      "Server connection failed: " + error.message;
-  }
-}
-
-loadPackages();
-</script>
-
 </body>
-</html>
+              </html>
+              
